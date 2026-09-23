@@ -75,6 +75,7 @@ int main (int argc, char* argv[])
         std::cout << "Asset [" << i << "]: ID 0x" << std::hex << entry.asset_id << std::dec << "\n";
         std::cout << "  |- Sample Rate: " << entry.sample_rate << " Hz\n";
         std::cout << "  |- Channels: " << (int)entry.channels << " (" << (entry.channels == 1 ? "Mono" : "Stereo") << ")\n";
+        std::cout << "  |- Bitrate: " << (int)entry.bits_per_sample << "bit.\n";
         std::cout << "  |- Preload Offset / Size: " << entry.preload_offset << " / " << entry.preload_size << " bytes\n";
         std::cout << "  |_ Stream Offset / Size: " << entry.stream_offset << " / " << entry.stream_size << " bytes\n\n";
     }
