@@ -17,7 +17,13 @@ elseif(UNIX AND NOT APPLE)
     set(PLATFORM_LIBS pthread dl m)
 endif()
 
+# Packer executable
 add_executable(ntbank_cli
         src/main.cpp)
 
 target_link_libraries(ntbank_cli PRIVATE ${PLATFORM_LIBS})
+
+# Unpacker / Inspector executable
+add_executable(ntbank_unpack
+        src/unpack.cpp)
+target_link_libraries(ntbank_unpack PRIVATE ${PLATFORM_LIBS})

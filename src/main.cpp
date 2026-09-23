@@ -63,6 +63,7 @@ int main(int argc, char* argv[]) {
         entry.asset_id = hash_asset_name(filepath);
         entry.sample_rate = wav.sampleRate;
         entry.channels = static_cast<std::uint8_t>(wav.channels);
+        entry.bits_per_sample = static_cast<std::uint8_t>(wav.bitsPerSample);
 
         std::uint32_t bytes_per_frame = wav.channels * (wav.bitsPerSample / 8);
         std::uint32_t preload_frame_count = wav.sampleRate / 10; // 100ms
