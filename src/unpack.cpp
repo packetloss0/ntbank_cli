@@ -91,10 +91,10 @@ int main (int argc, char* argv[])
     for (int i = 1; i < argc; ++i)
     {
         std::string arg = argv[i];
-        if ((arg == "-o" || arg == "-output-dir") && i + 1 < argc)
+        if ((arg == "-o" || arg == "--output-dir") && i + 1 < argc)
         {
             output_dir = argv[++i];
-        } else if (arg == "-n" || arg == "-keep-names")
+        } else if (arg == "-n" || arg == "--keep-names")
         {
             use_stored_names = true;
         } else if (bank_path.empty())
@@ -143,10 +143,17 @@ int main (int argc, char* argv[])
         fs::path relative_path;
         if (use_stored_names && entry.filename_length > 0 && !string_table.empty())
         {
-            relative_path = std::string(&string_table[entry.filename_offset], entry.filename_length);
+            std::string raw_string(&string_table[entry.filename_offset],entry.filename_length);
+
+            fs::path clean_path = fs::path(raw_string).lexically_normal();
+            if (clean_path.is_absolute())
+            {
+                clean_path = clean_path.relative_path();
+            }
+
+            relative_path = clean_path;
         } else
         {
-            // target_file_path = output_dir / ("extracted_" + std::to_string(i) + ".wav");
             relative_path = "extracted_" + std::to_string(i) + ".wav";
         }
 

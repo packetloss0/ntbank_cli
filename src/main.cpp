@@ -47,7 +47,6 @@ int main(int argc, char* argv[]) {
     for (const auto& paths : input_paths)
     {
         if (fs::is_directory(paths))
-        if (fs::is_directory(paths))
         {
             for (const auto& entry : fs::recursive_directory_iterator(paths))
             {
